@@ -1,12 +1,13 @@
 import React from 'react';
 import img from '../../assets/images/image-product-1.jpg';
 import deletes from '../../assets/images/deletes.svg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { cartActions } from '../../store/cart';
 
 const CartItem = (props) => {
+  const totalPrice = useSelector((state) => state.cart.totalPrice);
   const dispatch = useDispatch();
-  const { title, quantity, total, price, id } = props;
+  const { title, quantity, price, id } = props;
 
   const deleteFromCartHandler = () => {
     dispatch(cartActions.deleteItemFromCart(id));
@@ -24,7 +25,7 @@ const CartItem = (props) => {
             <h5 className='text-GrayishBlue'>${price.toFixed(2)}</h5>
             <h5 className='text-GrayishBlue'>x</h5>
             <h5 className='text-GrayishBlue'>{quantity}</h5>
-            <h2>${total.toFixed(2)}</h2>
+            <h2>${totalPrice.toFixed(2)}</h2>
           </div>
         </div>
         <div>
